@@ -150,6 +150,10 @@ client.on('message', message => {
                     اوامر ادارية
 ╚[❖════════════❖]╝
 
+ ❖ -mc ➾ اغلاق الشات
+
+ ❖ -mcun ➾ فتح الشات
+
  ❖ -kick <mention > ➾ لطرد عضو
  
  ❖ -mute < mention > ➾ اسكات عضو 
@@ -1026,6 +1030,358 @@ message.channel.stopTyping()
 }
 });
   
+
+editedcodes.on("message", (edited) => {
+    
+  if (edited.content === 'ticket-') {
+        const reason = edited.content.split(" ").slice(1).join(" ");
+        if (!edited.guild.roles.exists("name", "help")) return edited.channel.send(`**يجب عمل رتبة بأسم \`فريق الدعم\`**`);
+        if (edited.guild.channels.exists("name", "ticket-" + edited.author.id)) return edited.channel.send(`لديك تذكرة من الأسآس :joy:`);
+        edited.guild.createChannel(`just-ticket`, "text").then(c => {
+            let edited1 = edited.guild.roles.find("name", "help");
+            let edited2 = edited.guild.roles.find("name", "@everyone");
+            c.overwritePermissions(edited1, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            c.overwritePermissions(edited2, {
+                SEND_MESSAGES: false,
+                READ_MESSAGES: false
+            });
+            c.overwritePermissions(message.author, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            edited.channel.send(`:white_check_mark: تـم فتح التذكرة , #${c.name}.`);
+            const embed = new Discord.RichEmbed()
+                .setColor(0xCF40FA)
+                .addField(` ${message.author.username}!`, `**مرحبآ    , لدنيا فريق المساعده ليساعدك في أقرب وقت . **`)
+                .setTimestamp();
+            c.send({
+                embed: embed
+            });
+        }).catch(console.error); 
+    }
+	
+	    if (edited.content === '-close') {
+        if (!edited.channel.name.startsWith(`ticket-`)) return edited.channel.send(`**لا تستطيع :x:**`);
+
+        edited.channel.send(`**هل انت متأكد ؟ ** `)
+            .then((m) => {
+                edited.channel.awaitMessages(response => response.content === 'نعم', {
+                        max: 1,
+                        time: 10000,
+                        errors: ['time'],
+                    })
+                    .then((collected) => {
+                        edited.channel.delete();
+                    })
+                    .catch(() => {
+                        m.edit('وقت الأغلاق أنتهي , لن تمسح التذكرة .').then(m2 => {
+                            m2.delete();
+                        }, 3000);
+                    });
+            });
+        }
+
+    });
+
+
+
+
+const setupCMD = "-rolereact"
+let initialMessage = `**@everyone  rolereact**
+**React to the messages below to get role. If you would like to remove the role remove your reaction!** `;
+const roles = ["GAY", "KID", "+18", "16-17", "funny", "zamel", "3nab", "bitch", "m3wa9", "singel"];//رتب
+const reactions = ["👬", "👶", "😊", "🔞", "😂", "😘", "🍇", "💋", "🙅", "💔"];//رياكشن
+
+if (roles.length !== reactions.length) throw "Roles list and reactions list are not the same length!";
+
+
+function generateMessages(){
+    var messages = [];
+    messages.push(initialMessage);
+    for (let role of roles) messages.push(`React below to get the **"${role}"** role!`); 
+    return messages;
+}
+
+
+client.on("message", message => {
+    if (message.author.id == yourID && message.content.toLowerCase() == setupCMD){
+        var toSend = generateMessages();
+        let mappedArray = [[toSend[0], false], ...toSend.slice(1).map( (message, idx) => [message, reactions[idx]])];
+        for (let mapObj of mappedArray){
+            message.channel.send(mapObj[0]).then( sent => {
+                if (mapObj[1]){
+                  sent.react(mapObj[1]);  
+                } 
+            });
+        }
+    }
+})
+
+
+client.on('raw', event => {
+    if (event.t === 'MESSAGE_REACTION_ADD' || event.t == "MESSAGE_REACTION_REMOVE"){
+        
+        let channel = client.channels.get(event.d.channel_id);
+        let message = channel.fetchMessage(event.d.message_id).then(msg=> {
+        let user = msg.guild.members.get(event.d.user_id);
+        
+        if (msg.author.id == client.user.id && msg.content != initialMessage){
+       
+            var re = `\\*\\*"(.+)?(?="\\*\\*)`;
+            var role = msg.content.match(re)[1];
+        
+            if (user.id != client.user.id){
+                var roleObj = msg.guild.roles.find('name', role);
+                var memberObj = msg.guild.members.get(user.id);
+                
+                if (event.t === "MESSAGE_REACTION_ADD"){
+                    memberObj.addRole(roleObj)
+                } else {
+                    memberObj.removeRole(roleObj);
+                }
+            }
+        }
+        })
+ 
+    }   
+});
+
+
+client.on('message', message => {
+
+    if (message.content === "-mc") {
+                        if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
+
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: false
+
+           }).then(() => {
+               message.reply("تم تقفيل الشات ✅ ")
+           });
+             }
+if (message.content === "-unmc") {
+    if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
+
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: true
+
+           }).then(() => {
+               message.reply("تم فتح الشات✅")
+           });
+             }
+
+
+
+});
+
+
+
+
+client.on('message', msg => {
+  if (msg.content === 'السعودية') {      
+    msg.channel.send("🇸🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'مصر') {      
+    msg.channel.send("🇪🇬")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'المغرب') {      
+    msg.channel.send("🇲🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'العراق') {      
+    msg.channel.send("🇮🇶")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الجزائر') {      
+    msg.channel.send("🇩🇿")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الامارات') {      
+    msg.channel.send("🇦🇪")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'تونس') {      
+    msg.channel.send("🇹🇳")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'سوريا') {      
+    msg.channel.send("🇸🇾")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'ليبيا') {      
+    msg.channel.send("🇱🇾")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'قطر') {      
+    msg.channel.send("🇶🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الصومال') {      
+    msg.channel.send("🇸🇴")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'عمان') {      
+    msg.channel.send("🇴🇲")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'موريتانيا') {      
+    msg.channel.send("🇲🇷")
+  }
+});
+client.on('message', msg => {
+  if (msg.content === 'فلسطين') {      
+    msg.channel.send(":flag_ps:")
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
