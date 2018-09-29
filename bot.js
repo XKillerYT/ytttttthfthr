@@ -154,11 +154,13 @@ client.on('message', message => {
 
  ❖ -mcun ➾ فتح الشات
 
+ ❖ -role-info ➾ معلومات الرتب
+
  ❖ -kick <mention > ➾ لطرد عضو
  
  ❖ -mute < mention > ➾ اسكات عضو 
 
- ❖ -clear  ➾ لتنضيف المحادثة (fixing)
+ ❖ -clear  ➾ لتنضيف المحادثة 
 
  ❖ -cv <name> ➾ صنع روم صوتية
 
@@ -172,6 +174,8 @@ client.on('message', message => {
 ╔[❖════════════❖]╗
                     اوامر عامة
 ╚[❖════════════❖]╝
+
+❖ -ticket ➾ لفتح تذكره
 
 ❖ -roll <number> ➾ قرعة
 
@@ -1266,10 +1270,150 @@ client.on('message', msg => {
 });
 
 
+client.on('message',async message => {
+  let args = message.content.split(" ").slice(1).join(" ");
+  let role = message.guild.roles.find('name',args) || message.guild.roles.get(args);
+ 
+ 
+  if(message.content.startsWith(prefix + "role-info")) {
+    if(!args) return message.reply('اكتب اسم الرتبة');
+    if(!role) return message.reply('هذه الرتبة غير موجودة');
+    let iQp = new Discord.RichEmbed()
+    .setAuthor(message.author.tag,message.author.avatarURL)
+    .setTitle(message.guild.name)
+    .setThumbnail(message.guild.iconURL)
+    .addField('- اسم الرتبة',role.name,true)
+    .addField('- اي دي الرتبة',role.id,true)
+    .addField('- تم انشاء الرتبة',role.createdAt.toLocaleString(),true)
+    .addField('- لون الرتبة',role.hexColor,true)
+    .addField('- عدد الاعضاء الذي لديهم نفس الرتبة',role.members.size,true)
+    .addField('- مركز الرتبة بين كل الرتب',role.position,true)
+    .addField('- خصائص الرتبة',role.permissions,true)
+    .setFooter(message.author.tag,message.author.avatarURL);
+ 
+    message.channel.send(iQp);
+  }
+});
 
 
+ client.on("roleCreate", rc => {
+  const channel = rc.guild.channels.find("name", "log") //تقدر تغير اسم الشات
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rc.guild.name)
+  .setDescription(`***Created Role Name : *** **${rc.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+  //By S Codes
+  client.on("roleDelete",  rd => {
+  const channel = rd.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(rd.guild.name)
+  .setDescription(`***Deleted Role Name : *** **${rd.name}** `)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+client.on("channelCreate",  cc => {
+  const channel = cc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(cc.guild.name)
+  .setDescription(`***Channel Created Name : *** **${cc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+
+   client.on("deleteChannel",  dc => {
+  const channel = dc.guild.channels.find("name", "log")
+  if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(dc.guild.name)
+  .setDescription(`***Channel Deleted Name : *** **${dc.name}** ⬅️`)
+  .setColor(`RANDOM`)
+  .setTimestamp(); 
+  channel.sendEmbed(embed)
+  }
+  });
+  
+  
+  
+  client.on('messageUpdate', (message, newMessage) => {
+    if (message.content === newMessage.content) return;
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('SILVER')
+       .setDescription(`✏ **تعديل رساله
+ارسلها <@${message.author.id}>                                                                                                                         تم تعديلها في شات** <#${message.channel.id}>\n\nقبل التعديل:\n \`${message.cleanContent}\`\n\nبعد التعديل:\n \`${newMessage.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
 
 
+});
+
+client.on('guildMemberAdd', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.user.createdTimestamp).fromNow();
+    const isNew = (new Date() - member.user.createdTimestamp) < 900000 ? '🆕' : '';
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('GREEN')
+       .setDescription(`📥 <@${member.user.id}> **Joined To The Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+
+client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'log');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('RED')
+       .setDescription(`📤 <@${member.user.id}> **Leave From Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+
+client.on('messageDelete', message => {
+    if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+    const channel = message.guild.channels.find('name', 'log');
+    if (!channel) return;
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+       .setColor('BLACK')
+       .setDescription(`🗑️ **حذف رساله**
+**ارسلها <@${message.author.id}>                                                                                                                        تم حذفها في شات** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
+       .setTimestamp();
+     channel.send({embed:embed});
+
+});
 
 
 
