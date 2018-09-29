@@ -1013,7 +1013,8 @@ client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
     {
-    message.reply("https://discordapp.com/api/oauth2/authorize?client_id=484518205495443476&permissions=8&scope=bot");
+    message.reply("https://discordapp.com/api/oauth2/authorize?client_id=484518205495443476&permissions=8&scope=bot
+		  bot by <@252813587188416512> ");
     }
 });
 
