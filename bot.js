@@ -972,7 +972,21 @@ client.channels.get("492272547828596736").send(' ***  BOT  ***   **Leave From** 
 });
   
 
+const child_process = require("child_process");
+const adminprefix = "-";
+const devs = ['252813587188416512'];
 
+client.on('message', message => {
+if(message.content === prefix + "restart") {
+      if (!devs.includes(message.author.id)) return;
+          message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
+        client.destroy();
+        child_process.fork(__dirname + "/الملف.js");
+        console.log(`تم اعادة تشغيل البوت`);
+    }
+  
+  });
 
 
 
