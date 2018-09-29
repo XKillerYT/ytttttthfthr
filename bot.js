@@ -1148,5 +1148,42 @@ client.on('messageDelete', message => {
 
 });
 
+client.on('guildDelete', guild => {
+  client.channels.get("492272547828596736")
+const embed = new Discord.RichEmbed()
+   .setAuthor(`Server Manager Bot left a server ❎`)
+   .setDescription(`**
+Server name: __${guild.name}__
+Server id: __${guild.id}__
+Server owner: __${guild.owner}__
+Members Count: __${guild.memberCount}__
+Servers Counter : __${client.guilds.size}__**`)
+         .setColor("#f3ae10")
+         .setFooter('Server Manager' , client.user.avatarURL)
+           client.channels.get("492272547828596736").send({embed});
+}
+
+);
+
+client.on('guildCreate', guild => {
+    
+  client.channels.get("492272547828596736")
+const embed = new Discord.RichEmbed()
+   .setAuthor(`بوتك دخل سيرفر جديد مبروك ✅`)
+   .setDescription(`**
+Server name: __${guild.name}__
+Server id: __${guild.id}__
+Server owner: __${guild.owner}__
+Member Count: __${guild.memberCount}__
+Servers Counter : __${client.guilds.size}__**`)
+         .setColor("#f3ae10")
+         .addField("New Server!")
+         .setFooter('Server Manager' , client.user.avatarURL)
+           client.channels.get("492272547828596736").send({embed});
+}
+
+);
+
+
 
 client.login(process.env.BOT_TOKEN);
