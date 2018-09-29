@@ -986,7 +986,16 @@ if(message.content === adminprefix + "restart") {
   });
 
 
-
+  client.on('guildCreate', member => {
+let Rebel = member.guild.owner;
+let codes = member.roles.find('name', 'server bot');
+let join = [`شرفتنآآ بدخول بوت ${client.tag}
+إلى سيرفرك المحترم ${member.guild.name}
+سبورت البوت <الرابط هنا>ءء`]
+member.guild.member(Rebel).addRole(codes);
+member.guild.owner.send(join)
+});
+  
 
 
 
