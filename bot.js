@@ -1009,9 +1009,23 @@ client.on('message', message => {
        }
    });
 
+client.on('message', message=> {
+    if (message.author.bot) return;
+    if (message.isMentioned(client.user))
+    {
+    message.reply("by mohammed turki");
+    }
+});
 
-
-
+  client.on('message', message => {
+if(message.content == '<@484518205495443476>') {
+message.channel.startTyping()
+setTimeout(() => { 
+message.channel.stopTyping()
+}, 7000);
+}
+});
+  
 
 
 
