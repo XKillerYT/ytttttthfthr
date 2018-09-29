@@ -991,13 +991,20 @@ let Rebel = member.guild.owner;
 let codes = member.roles.find('name', 'server bot');
 let join = [`شرفتنآآ بدخول بوت ${client.tag}
 إلى سيرفرك المحترم ${member.guild.name}
-سبورت البوت <الرابط هنا>ءء`]
+سبورت البوت <https://discord.gg/cMfKv6>ءء`]
 member.guild.member(Rebel).addRole(codes);
 member.guild.owner.send(join)
 });
   
 
-
+client.on('message', message => {
+        if (message.content.toLowerCase() === prefix + "inv") {
+            if(!message.channel.guild) return;
+        let embed = new Discord.RichEmbed()
+        .setTitle(`:small_orange_diamond: Click Here To Invite | أضغط لدعوة البوت :small_orange_diamond: `)
+        .setURL(`https://discordapp.com/api/oauth2/authorize?client_id=484518205495443476&permissions=8&scope=bot`)
+     message.channel.sendEmbed(embed);
+       }
 
 
 
