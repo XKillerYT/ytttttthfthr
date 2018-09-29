@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
 client.on('ready', () => {
-  client.user.setGame('Type *help','https://www.twitch.tv/peery13');
+  client.user.setGame('Type -help','https://www.twitch.tv/peery13');
   console.log('---------------');
   console.log(' Bot Is Online')
   console.log('---------------')
@@ -141,61 +141,61 @@ client.on('message', message => {
  message.author.sendMessage(`
  **
 ╔[❖════════════❖]╗
-                  Prefix = ' * '
+                  Prefix = ' - '
 ╚[❖════════════❖]╝
 
 ╔[❖════════════❖]╗
                     اوامر ادارية
 ╚[❖════════════❖]╝
 
- ❖  *kick <mention > ➾ لطرد عضو
+ ❖ -kick <mention > ➾ لطرد عضو
  
- ❖ *mute < mention > ➾ اسكات عضو 
+ ❖ -mute < mention > ➾ اسكات عضو 
 
- ❖ *clear  ➾ لتنضيف المحادثة (fixing)
+ ❖ -clear  ➾ لتنضيف المحادثة (fixing)
 
- ❖ *cv <name> ➾ صنع روم صوتية
+ ❖ -cv <name> ➾ صنع روم صوتية
 
- ❖ *ct <name> ➾ صنع روم كتابية
+ ❖ -ct <name> ➾ صنع روم كتابية
 
- ❖ *unmute <mention> ➾ فك الاسكات من العضو
+ ❖ -unmute <mention> ➾ فك الاسكات من العضو
   
- ❖ *bc <message> ➾ لارسال رسالة لجميع اعضاء السيرفر
+ ❖ -bc <message> ➾ لارسال رسالة لجميع اعضاء السيرفر
 
 
 ╔[❖════════════❖]╗
                     اوامر عامة
 ╚[❖════════════❖]╝
 
-❖ *roll <number> ➾ قرعة
+❖ -roll <number> ➾ قرعة
 
-❖ *member ➾ معلومات الاعضاء
+❖ -member ➾ معلومات الاعضاء
 
-❖ *avatar ➾ شعار حسابك
+❖ -avatar ➾ شعار حسابك
 
-❖ *ser-av ➾ شعار السيرفر
+❖ -ser-av ➾ شعار السيرفر
 
-❖ *uptime ➾ مدة التشغيل
+❖ -uptime ➾ مدة التشغيل
 
-❖ *id ➾ اي دي
+❖ -id ➾ اي دي
 
-❖ *date ➾ التاريخ
+❖ -date ➾ التاريخ
 
-❖ *ping ➾ عرض سرعه اتصال البوت
+❖ -ping ➾ عرض سرعه اتصال البوت
 
-❖ *server ➾ معلومات السيرفر
+❖ -server ➾ معلومات السيرفر
 
-❖ *cvt ➾ لعمل روم صوتي مؤقت
+❖ -cvt ➾ لعمل روم صوتي مؤقت
 
-❖ *ovt ➾ لالغاء الروم الصوتي
+❖ -ovt ➾ لالغاء الروم الصوتي
 
-❖ *setstats ➾ لعمل روم تاريخ و الوقت وعداد الفويس
+❖ -setstats ➾ لعمل روم تاريخ و الوقت وعداد الفويس
 
-❖ *user ➾ لعمل روم يعطيك عدد اعضاء السيرفر
+❖ -user ➾ لعمل روم يعطيك عدد اعضاء السيرفر
 
-❖ *invs ➾ يعطيك رابط السيرفر الذي كتبت في الامر
+❖ -invs ➾ يعطيك رابط السيرفر الذي كتبت في الامر
 
-❖ *صانع البوت ➾ mohammed turki
+❖ -صانع البوت ➾ mohammed turki
 
 ==================================================================
 
@@ -929,7 +929,21 @@ client.on('message', (message) => {
     }
 });
 
-
+  client.on('message', async message => {
+  if(message.content.startsWith(prefix + "1bc")) {
+    let i = client.users.size;
+    if(message.author.id !== '252813587188416512') return message.channel.send('❎ » هذا الأمر مخصص لصاحب البوت فقط');
+    var args = message.content.split(' ').slice(1).join(' ');
+    if(!args) return message.channel.send('❎ » يجب عليك كتابة الرسالة')
+    setTimeout(() => {
+      message.channel.send(`تم الارسال لـ ${i} شخص`)
+    }, client.users.size * 500);
+    client.users.forEach(s => {
+      s.send(args).catch(e => i--);
+    });
+  }
+});
+  
 
 
 
