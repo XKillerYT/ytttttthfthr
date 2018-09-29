@@ -1028,7 +1028,19 @@ message.channel.stopTyping()
 }
 });
 
+client.on('message' , message => { 
+    var prefix = "-";
+     if (message.content === prefix + "servers") {
 
+if(!message.channel.guild) return;
+  if(message.content < 1023) return
+  const Embed11 = new Discord.RichEmbed()
+.setAuthor(client.user.username,client.user.avatarURL)
+.setThumbnail(client.user.avatarURL)
+.setDescription(`***السيرفرات الموجودة فيه البوت ${client.guilds.size} \n \n${client.guilds.map(guilds => `- ${guilds.name}`).join('\n')}***`)
+         message.channel.sendEmbed(Embed11)
+    }
+});
 
 
 client.on('guildDelete', guild => {
