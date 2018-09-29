@@ -150,12 +150,6 @@ client.on('message', message => {
                     اوامر ادارية
 ╚[❖════════════❖]╝
 
- ❖ -mc ➾ اغلاق الشات
-
- ❖ -mcun ➾ فتح الشات
-
- ❖ -role-info ➾ معلومات الرتب
-
  ❖ -kick <mention > ➾ لطرد عضو
  
  ❖ -mute < mention > ➾ اسكات عضو 
@@ -1154,64 +1148,10 @@ client.on('raw', event => {
 });
 
 
-client.on('message', message => {
-
-    if (message.content === "-mc") {
-                        if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
-
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' ليس لديك صلاحيات');
-           message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: false
-
-           }).then(() => {
-               message.reply("تم تقفيل الشات ✅ ")
-           });
-             }
-if (message.content === "-unmc") {
-    if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
-
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
-           message.channel.overwritePermissions(message.guild.id, {
-         SEND_MESSAGES: true
-
-           }).then(() => {
-               message.reply("تم فتح الشات✅")
-           });
-             }
-
-
-
-});
 
 
 
 
-
-
-client.on('message',async message => {
-  let args = message.content.split(" ").slice(1).join(" ");
-  let role = message.guild.roles.find('name',args) || message.guild.roles.get(args);
- 
- 
-  if(message.content.startsWith(prefix + "role-info")) {
-    if(!args) return message.reply('اكتب اسم الرتبة');
-    if(!role) return message.reply('هذه الرتبة غير موجودة');
-    let iQp = new Discord.RichEmbed()
-    .setAuthor(message.author.tag,message.author.avatarURL)
-    .setTitle(message.guild.name)
-    .setThumbnail(message.guild.iconURL)
-    .addField('- اسم الرتبة',role.name,true)
-    .addField('- اي دي الرتبة',role.id,true)
-    .addField('- تم انشاء الرتبة',role.createdAt.toLocaleString(),true)
-    .addField('- لون الرتبة',role.hexColor,true)
-    .addField('- عدد الاعضاء الذي لديهم نفس الرتبة',role.members.size,true)
-    .addField('- مركز الرتبة بين كل الرتب',role.position,true)
-    .addField('- خصائص الرتبة',role.permissions,true)
-    .setFooter(message.author.tag,message.author.avatarURL);
- 
-    message.channel.send(iQp);
-  }
-});
 
 
 
