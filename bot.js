@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
+const adminprefix = "-";
 client.on('ready', () => {
   client.user.setGame('Type -help','https://www.twitch.tv/peery13');
   console.log('---------------');
@@ -977,7 +978,7 @@ const adminprefix = "-";
 const devs = ['252813587188416512'];
 
 client.on('message', message => {
-if(message.content === prefix + "restart") {
+if(message.content === adminprefix + "restart") {
       if (!devs.includes(message.author.id)) return;
           message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
         console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
