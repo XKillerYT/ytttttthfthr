@@ -1013,7 +1013,7 @@ client.on('message', message=> {
     if (message.author.bot) return;
     if (message.isMentioned(client.user))
     {
-    message.reply("by mohammed turki");
+    message.reply("https://discordapp.com/api/oauth2/authorize?client_id=484518205495443476&permissions=8&scope=bot");
     }
 });
 
