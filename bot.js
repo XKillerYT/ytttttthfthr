@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
+const adminprefix = "-";
 client.on('ready', () => {
   client.user.setGame('Type -help','https://www.twitch.tv/peery13');
   console.log('---------------');
@@ -234,7 +235,6 @@ if (message.author.bot) return;
 
 
 const devs = ['252813587188416512'];
-const adminprefix = "-";
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
       if (!devs.includes(message.author.id)) return;
@@ -973,7 +973,6 @@ client.channels.get("492272547828596736").send(' ***  BOT  ***   **Leave From** 
   
 
 const child_process = require("child_process");
-const adminprefix = "-";
 const devs = ['252813587188416512'];
 
 client.on('message', message => {
