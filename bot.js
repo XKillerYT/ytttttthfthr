@@ -1035,7 +1035,7 @@ message.channel.stopTyping()
 });
   
 
-editedcodes.on("message", (edited) => {
+
     
   if (edited.content === 'ticket-') {
         const reason = edited.content.split(" ").slice(1).join(" ");
