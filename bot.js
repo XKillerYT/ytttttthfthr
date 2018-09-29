@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
-const adminprefix = "-";
 client.on('ready', () => {
   client.user.setGame('Type -help','https://www.twitch.tv/peery13');
   console.log('---------------');
