@@ -162,8 +162,9 @@ client.on('message', message => {
 
  ❖ -unmute <mention> ➾ فك الاسكات من العضو
   
+ ❖ -startdisco ➾ تشغيل رتبت الريمبو لازم رتبه ب اسم Rainbow
 
-
+ ❖ -stopdisco ➾ اغلاق رتبت الريمبو
 
 ╔[❖════════════❖]╗
                     اوامر عامة
