@@ -1069,7 +1069,7 @@ client.on("ready", () => {
         client.guilds.get("491176480898809875").roles.find("name", "ريمبو").edit({
             color : "RANDOM"
         });
-    }, 60000)
+    }, 600)
 });
 
 
