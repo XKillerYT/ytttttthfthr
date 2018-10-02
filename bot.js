@@ -1100,8 +1100,7 @@ if(message.content.startsWith(prefix + "stopdisco")) {
 
 
 
-const allowedUsers = config.allowedUsers;
-const roles = config.roleToDisco;
+
 
 client.on("ready", () => {
     client.user.setPresence({ game: { name: `Rainbow` }, type: 0 });
