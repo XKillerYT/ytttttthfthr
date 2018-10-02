@@ -1073,7 +1073,14 @@ client.on("ready", () => {
 });
 
 
-
+client.on("message", (message) => {
+    if(message.content.startsWith(prefix+"email")) {
+        message.channel.send(JSON.stringify({
+            email: Math.random().toString(36).slice(4).trim()+"@gmail.com",
+            password: Math.random().toString(36).slice(4).trim()
+        }))
+    }
+})
 
 
 
