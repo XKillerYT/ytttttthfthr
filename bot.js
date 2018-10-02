@@ -1097,14 +1097,14 @@ if(message.content.startsWith(prefix + "stopdisco")) {
 }
 
 });
-const config = require('config.json');
-const prefix = config.prefix;
+
+
 
 const allowedUsers = config.allowedUsers;
 const roles = config.roleToDisco;
 
 client.on("ready", () => {
-    client.user.setPresence({ game: { name: `Disco` }, type: 0 });
+    client.user.setPresence({ game: { name: `Rainbow` }, type: 0 });
     console.log("Disco role bot online! Created by i am toast.");
 });
 
