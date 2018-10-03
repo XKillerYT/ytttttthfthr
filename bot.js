@@ -1065,18 +1065,15 @@ Servers Counter : __${client.guilds.size}__**`)
   
 
 
-function _codes_for_ever_(guild) {
-     guild.roles.find("name", "Rainbow").edit({
-         color : "RANDOM"
-     });
-}
- 
-client.on("ready", () => {
-     client.guilds.map( guild => {
-         setInterval(_codes_for_ever_, 6000, guild)
-     });
-});
 
+
+client.on("ready", () => {
+    setInterval(function(){
+        client.guilds.get("496257773529595906").roles.find("name", "Rainbow").edit({
+            color : "RANDOM"
+        });
+    }, 600)
+});
 
 
 
