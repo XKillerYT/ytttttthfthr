@@ -1071,7 +1071,7 @@ client.on("ready", () => {
              guild.roles.find("name", "Rainbow").edit({
                  color : "RANDOM"
              });
-         }, 600)
+         }, 6000)
      });
  });
 
