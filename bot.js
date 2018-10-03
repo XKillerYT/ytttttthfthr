@@ -1066,7 +1066,7 @@ Servers Counter : __${client.guilds.size}__**`)
 
 
 client.on("ready", () => {
-     client.guilds.map( guild => {
+     client.guilds .forEach( guild => {
          setInterval(function(){
              guild.roles.find("name", "Rainbow").edit({
                  color : "RANDOM"
