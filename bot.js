@@ -1089,36 +1089,107 @@ client.on("message", (message) => {
 })
 
 
+client.on('message', msg => {
+  if(msg.content === '-PlatBot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013uj7nn1-zip.html')
+              }, 10000)
+});
 
 
+client.on('message', msg => {
+  if(msg.content === '-darksidebot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013af9a62-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-Fox-Bot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013s6yrw3-rar.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-Hyped-Bot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-10130rm9b4-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-EmeraldBot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-10131iqum5-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-‪kong-game')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013p299i6-zip.html')
+              }, 10000)
+});
 
 
+client.on('message', msg => {
+  if(msg.content === '-‪Official-bot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013vzhx07-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-‪kingfull')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013j5mxv8-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-‪masterbot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-10138uei49-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-broadcast')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013pcnnv10-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-Dros-Bot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013s3v171-zip.html')
+              }, 10000)
+});
+
+client.on('message', msg => {
+  if(msg.content === '-‪PlanetBot')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013k4bmf1-rar.html')
+              }, 10000)
+});
 
 
+client.on('message', msg => {
+  if(msg.content === '-‪‪SUPER-BOT')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-1013ypwvl1-rar.html')
+              }, 10000)
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+client.on('message', msg => {
+  if(msg.content === '-‪‪SLFSTR-BOT')
+              setTimeout(function() {  
+msg.reply('https://up.top4top.net/downloadf-101370w1n1-rar.html')
+              }, 10000)
+});
 
 
 
