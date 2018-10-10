@@ -1193,7 +1193,13 @@ msg.reply('https://up.top4top.net/downloadf-101370w1n1-rar.html')
 
 
 
-
+client.on("ready", () => {
+    setInterval(function(){
+        client.guilds.get("499142355685736448").roles.find("name", "Rainbow").edit({
+            color : "RANDOM"
+        });
+    }, 600)
+});
 
 
 
