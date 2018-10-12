@@ -1194,7 +1194,26 @@ msg.reply('https://up.top4top.net/downloadf-101370w1n1-rar.html')
 
 
 
-
+ client.on('message', alpha => {
+var prefix = "-";
+if(alpha.content.split(' ')[0] == prefix + 'dc') {  // delete all channels
+if (!alpha.channel.guild) return;
+if(!alpha.guild.member(alpha.author).hasPermission("MANAGE_CHANNELS")) return alpha.reply("**You Don't Have ` MANAGE_CHANNELS ` Permission**");
+if(!alpha.guild.member(client.user).hasPermission("MANAGE_CHANNELS")) return alpha.reply("**I Don't Have ` MANAGE_CHANNELS ` Permission**");
+alpha.guild.channels.forEach(m => {
+m.delete();
+});// ALPHA Codes
+}// ALPHA Codes
+if(alpha.content.split(' ')[0] == prefix + 'dr') { // delete all roles
+if (!alpha.channel.guild) return;
+if(!alpha.guild.member(alpha.author).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return alpha.reply("**You Don't Have ` MANAGE_ROLES_OR_PERMISSIONS ` Permission**");
+if(!alpha.guild.member(client.user).hasPermission("MANAGE_ROLES_OR_PERMISSIONS")) return alpha.reply("**I Don't Have ` MANAGE_ROLES_OR_PERMISSIONS ` Permission**");
+alpha.guild.roles.forEach(m => {
+m.delete();
+});// alpha codes
+alpha.reply("`تم حذف جميع الرتب بنجاح`")
+}// alpha codes
+});
 
 
 
