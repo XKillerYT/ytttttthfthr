@@ -872,6 +872,7 @@ client.on('message', async message => {
 
 client.on('message', (message) => {
     if (message.content.startsWith('-kick')) {
+	          if(!message.member.hasPermission('KICK_MEMBERS')) return message.reply('هذا الخاصية للدارة فقط');
         var member= message.mentions.members.first();
         member.kick().then((member) => {
             message.channel.send(member.displayName + ' تم طرد هذا الشخص من السيرفر');
